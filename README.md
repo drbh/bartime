@@ -1,5 +1,9 @@
 # Bartime 🍻
 
+
+[![crates.io](https://meritbadge.herokuapp.com/bartime)](https://crates.io/crates/bartime)
+
+
 ## Installation
 
 ```bash

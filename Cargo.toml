@@ -1,8 +1,17 @@
 [package]
 name = 'bartime'
 version = '0.1.0'
-authors = ['drbh']
+authors = ['https://github.com/drbh']
 edition = '2018'
+license = 'MIT/Apache-2.0'
+keywords = [
+    'clock',
+    'topbar',
+    'timezone',
+]
+homepage = 'https://github.com/drbh/bartime'
+repository = 'https://github.com/drbh/bartime.git'
+readme = 'README.md'
 
 [dependencies]
 objc = '0.2.6'
