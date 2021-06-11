@@ -24,6 +24,7 @@ toml = '0.5.1'
 chrono = '0.4'
 notify = '4.0.17'
 run_script = '0.8.0'
+dirs = '3.0.2'
 
 [dependencies.serde]
 version = '1.0'

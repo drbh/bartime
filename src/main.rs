@@ -62,39 +62,54 @@ EOF
         return;
     }
 
-    let config_path = "/Users/drbh/.bartime/config.toml";
+    let home_dir = dirs::home_dir().expect("failed to find home directory");
 
-    if Path::new(config_path).exists() {
-        // fs::remove_file(file).unwrap();
-    } else {
-        fs::create_dir_all("/Users/drbh/.bartime").expect("failed to make dir");
+    let config_dir = format!(
+        "{}{}",
+        home_dir.as_path().display().to_string(),
+        "/.bartime"
+    );
+
+    let config_path = Arc::new(format!(
+        "{}{}",
+        home_dir.as_path().display().to_string(),
+        "/.bartime/config.toml"
+    ));
+
+    if !Path::new(&*config_path).exists() {
+        fs::create_dir_all(config_dir).expect("failed to make dir");
 
         let _file = OpenOptions::new()
             .write(true)
             .create_new(true)
-            .open(config_path);
+            .open(&*config_path);
 
         let data = r#"
 [[location]]
     name = "NYC 🗽"
     tz = "America/New_York"
         "#;
-        fs::write(config_path, data).expect("Unable to write file");
+        fs::write(&*config_path, data).expect("Unable to write file");
     }
 
-    let config = read_config(config_path).expect("error reading config.toml");
+    let config = read_config(&*config_path).expect("error reading config.toml");
     let amlocations = Arc::new(Mutex::new(config.location));
 
     let file_change_reset_locations = Arc::clone(&amlocations);
     let interval_reset_locations = Arc::clone(&amlocations);
     let force_reset_locations = Arc::clone(&amlocations);
 
+    let path_for_filechange = Arc::clone(&config_path);
+    let path_for_refresh = Arc::clone(&config_path);
+    let path_for_watcher = Arc::clone(&config_path);
+
     let (tx, rx) = channel();
 
     thread::spawn(move || loop {
         match rx.recv() {
             Ok(_event) => {
-                let _config = read_config(config_path).expect("error reading config.toml");
+                let _config =
+                    read_config(&*path_for_filechange).expect("error reading config.toml");
                 *file_change_reset_locations.lock().unwrap() = _config.location
             }
             Err(e) => println!("watch error: {:?}", e),
@@ -104,7 +119,7 @@ EOF
     let mut watcher = watcher(tx, Duration::from_millis(2_000)).unwrap();
 
     watcher
-        .watch(config_path, RecursiveMode::Recursive)
+        .watch(&*path_for_watcher, RecursiveMode::Recursive)
         .unwrap();
 
     let (tx_query, rx_query) = channel::<String>();
@@ -117,7 +132,7 @@ EOF
                     .expect("manual refresh send failed");
 
                 // force a reread
-                let _config = read_config(config_path).expect("error reading config.toml");
+                let _config = read_config(&*path_for_refresh).expect("error reading config.toml");
                 *force_reset_locations.lock().unwrap() = _config.location;
             });
             let _ = status_bar.add_item(None, "Refresh", cb, false);
