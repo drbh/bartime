@@ -1,14 +1,20 @@
-# Bartime 🍻
+# bartime 🍻
 
+<a href="https://crates.io/crates/bartime">
+  <img alt="Crates.io" src="https://img.shields.io/crates/v/bartime.svg">
+</a>
 
-[![crates.io](https://meritbadge.herokuapp.com/bartime)](https://crates.io/crates/bartime)
-
+![bartime screenshot](photos/screenshot.png)
 
 ## Installation
 
 ```bash
 cargo install bartime
 ```
+
+## Screenshot
+
+![screenshot](photos/screenshot.png)
 
 ## Add OSX Application
 ```bash
@@ -29,29 +35,29 @@ The configuration file is located in `~/.bartime/config.toml`. The application w
 
 ```toml
 [[location]]
-	name = "CAL 🏄‍♀️"
-	tz = "America/Los_Angeles"
+  name = "CAL 🏄‍♀️"
+  tz = "America/Los_Angeles"
 
 [[location]]
-	name = "NYC 🗽"
-	tz = "America/New_York"
+  name = "NYC 🗽"
+  tz = "America/New_York"
 
 [[location]]
-	name = "ENG 🇬🇧"
-	tz = "Europe/London"
+  name = "ENG 🇬🇧"
+  tz = "Europe/London"
 
 [[location]]
-	name = "SHI 🇨🇳"
-	tz = "Asia/Shanghai"
+  name = "SHI 🇨🇳"
+  tz = "Asia/Shanghai"
 
 [[location]]
-	name = "NZE 🇳🇿"
-	tz = "Pacific/Auckland"
+  name = "NZE 🇳🇿"
+  tz = "Pacific/Auckland"
 ```
 
 # Resources
 
 ### Helpful time stuff
 
-https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+https://en.wikipedia.org/wiki/List_of_tz_database_time_zones  
 https://24timezones.com/current_world_time.php
