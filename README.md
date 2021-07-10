@@ -12,10 +12,6 @@
 cargo install bartime
 ```
 
-## Screenshot
-
-![screenshot](photos/screenshot.png)
-
 ## Add OSX Application
 ```bash
 bartime install
