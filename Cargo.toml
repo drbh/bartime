@@ -1,6 +1,6 @@
 [package]
 name = 'bartime'
-version = '0.1.0'
+version = '0.1.1'
 authors = ['https://github.com/drbh']
 edition = '2018'
 description = 'A simple developer friendly top bar clock for OSX. Made for people who work with others in many different timezones.'

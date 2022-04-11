@@ -56,7 +56,7 @@ cat > "$DST/$APPDIR/Contents/Info.plist" << EOF
 }}
 EOF
          "#;
-        let (_code, _output, _error) = run_script::run(&script, &args, &options).unwrap();
+        let (_code, _output, _error) = run_script::run(script, &args, &options).unwrap();
         println!("Installed bartime.app at /Applications/Bartime");
         println!("Configuration file at ~/.bartime/config.toml");
         return;
